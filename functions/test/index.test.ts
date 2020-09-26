@@ -1,3 +1,4 @@
+import 'mocha';
 import { test } from './setup';
 import { expect } from 'chai';
 import { addMessage, makeUppercase } from '../src';
