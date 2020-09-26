@@ -1,22 +1,12 @@
 import { test } from './setup';
 import { expect } from 'chai';
-import { helloWorld, addMessage, makeUppercase } from '../src';
+import { addMessage, makeUppercase } from '../src';
 import { db } from '../src/firestore';
 
-after(() => {
+after(async () => {
   test.cleanup();
 })
 describe("onRequest", () => {
-  it("helloWorld", done => {
-    const req: any = {}
-    const res: any = {
-      send: (body: string) => {
-        expect(body).equal("Hello from Firebase!");
-        done();
-      }
-    }
-    helloWorld(req, res);
-  });
   it("addMessage", done => {
     const req: any = { query: {text: 'input'} };
     const res: any = {
