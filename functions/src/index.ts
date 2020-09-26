@@ -8,12 +8,18 @@ export const helloWorld = functions.https.onRequest((_, response) => {
   response.send("Hello from Firebase!");
 });
 
-export const createAda = functions.https.onRequest((_, response) => {
-  const docRef = db.collection('users').doc('alovelace');
-  const setAda = docRef.set({
-    first: 'Ada',
-    last: 'Lovelace',
-    born: 1815
-  });
-  response.json({ setAda });
-})
+interface Message {
+  text: string
+}
+
+export const makeUppercase = functions.firestore.document('messages/{pushId}').onCreate((snapshot, context) => {
+  const data = snapshot.data() as Message;
+  data.text = data.text.toUpperCase();
+  return snapshot.ref.set(data)
+});
+
+export const addMessage = functions.https.onRequest(async (req, res) => {
+  const text = req.query.text;
+  const snapshot = await db.collection('/messages').add({original: { text }});
+  res.redirect(303, snapshot.path);
+});
