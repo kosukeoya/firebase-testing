@@ -1,0 +1,15 @@
+{
+  "name": "sandbox-soct",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "cd ./functions && npm run build; npx firebase emulators:start --only functions,firestore,hosting"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-tools": "^8.11.2"
+  }
+}
